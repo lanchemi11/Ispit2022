@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    
+
+    <h1>Update</h1>
+
+    <form action="/update/{{biciklista.get_broj_prijave()}}" method="POST">
+        <p>
+			<label for="broj_prijave">Broj broj_prijave</label>
+			<input type="text" name="broj_prijave" value="{{biciklista.get_broj_prijave()}}">
+			<span>{{broj_prijave_greska}}</span>
+		</p>
+
+		<p>
+			<label for="pol">Pol</label>
+			<input type="radio" name="pol" value="M"
+                {% if 'M' == biciklista[3] %}
+                    checked
+                {% endif %}
+            >M
+			<input type="radio" name="pol" value="Z"
+            {% if 'Z' == biciklista[3] %}
+                checked
+            {% endif %}
+            >Z
+		</p>
+
+		<p>
+			<label for="password">Password</label>
+			<input type="password" name="password">
+		</p>
+
+		<p>
+			<label for="confirm">Confirm password</label>
+			<input type="password" name="confirm">
+			<span>{{confirm_greska}}</span>
+		</p>
+
+		<p>
+			<label for="prva_etapa">Vreme za prvu etapu</label>
+			<input type="number" name="prva_etapa" value="{{biciklista.get_prva_etapa()}}">
+			<span>{{prva_etapa_greska}}</span>
+		</p>
+
+		<p>
+			<label for="druga_etapa">Vreme za drugu etapu</label>
+			<input type="number" name="druga_etapa" value="{{biciklista.get_druga_etapa()}}">
+			<span>{{druga_etapa_greska}}</span>
+		</p>
+
+		<p>
+			<input type="submit" value="Update">
+		</p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show all</title>
+</head>
+<body>
+
+    <h1>Show all</h1>
+
+    {% if 'broj_prijave' in session %}
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Broj prijave</th>
+            <th>Sifra</th>
+            <th>Pol</th>
+            <th>Etapa jedan</th>
+            <th>Etapa dva</th>
+            <th>Ukupno vreme</th>
+            {% if 'broj_prijave' in session %}
+              <th>Delete</th>
+              <th>Update</th>
+            {% endif %}
+        </tr>
+    </thead>
+        <tbody>
+            {% for i in biciklisti %}
+            <tr>
+                <td>{{i.get_id()}}</td>
+                <td>
+                    <a href="/profili/{{i.get_broj_prijave()}}">
+                        {{i.get_broj_prijave()}}
+                    </a>
+                </td>
+                <td>{{i.get_sifra()}}</td>
+                <td>{{i.get_pol()}}</td>
+                <td>{{i.get_prva_etapa()}}</td>
+                <td>{{i.get_druga_etapa()}}</td>
+                <td>{{i.izracunaj_ukupno_vreme()}}</td>
+                {% if 'broj_prijave' in session %}
+                   <td>
+                       <a href="/delete/{{i.get_broj_prijave()}}"><input type="submit" value="Delete"></a>
+                   </td>
+
+                   <td>
+                       <a href="/update/{{i.get_broj_prijave()}}"><input type="submit" value="Update"></a>
+                   </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+</body>
+</html>
